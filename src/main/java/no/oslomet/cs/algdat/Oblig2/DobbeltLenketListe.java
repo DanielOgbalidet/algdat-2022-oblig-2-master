@@ -85,7 +85,8 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public boolean inneholder(T verdi) {
-        throw new UnsupportedOperationException();
+        //Sjekker med indeksTil om verdien finnes eller om vi får -1 tilbake
+        return indeksTil(verdi) != -1;
     }
 
     @Override
