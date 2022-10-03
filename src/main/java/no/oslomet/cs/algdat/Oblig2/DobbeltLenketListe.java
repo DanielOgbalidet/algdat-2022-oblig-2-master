@@ -45,14 +45,34 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     }
 
     public DobbeltLenketListe(T[] a) {
-        throw new UnsupportedOperationException();
+        // throw new UnsupportedOperationException();
+
         //Sjekker om a er null
+        Objects.requireNonNull(a, "Tabellen a er null!");
 
         //Sjekker om a har 0 i lengde
+        if (a.length == 0){
+            hode = hale = null;
+        }
 
         // Setter inn siste elementet først, fordi det er lettere å sette elementene på starten av lista
         // Sjekker siste element i lista som != null
-        // Bruk for-loop til å gå igjennom lista og lag noder som connecter til hverandre
+        antall = 0;
+        int antallNulls = 0; // teller antall nuller i lista
+        for (int i = a.length - 1; i >= 0; i--){
+            if (a[i] != null){ //finner det siste elementet i lista som ikke er 0
+                hode = hale = new Node<>(a[i], null, null); // NB! Sjekk om den er null!!!!
+                antall++; //teller opp antall
+                for (int j = i - 1; j >= 0; j--){
+                    if (a[j] != null){
+                        hode.forrige = new Node<>(a[j], null, hode);
+                        hode = hode.forrige;
+                        antall++; //teller opp antall;
+                    }
+                }
+                break; // stopper for-loopen
+            }
+        }
     }
 
     public Liste<T> subliste(int fra, int til) {
@@ -76,7 +96,24 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public boolean leggInn(T verdi) {
-        throw new UnsupportedOperationException();
+        // throw new UnsupportedOperationException();
+        if (verdi == null){
+            Objects.requireNonNull(verdi, "Kan ikke legge inn null-verdi!"); //NB! finn metode for å sjekke om verdi er null
+            return false;
+        }
+
+        if (antall == 0){
+            hode = hale = new Node<>(verdi, null, null);
+        }
+
+        else {
+            hale.neste = new Node<>(verdi, hale, null);
+            hale = hale.neste;
+        }
+
+        antall++;
+        endringer++;
+        return true;
     }
 
     @Override
