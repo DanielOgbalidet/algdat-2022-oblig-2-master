@@ -9,6 +9,7 @@ import java.util.Iterator;
 
 
 //Sjekk den her
+//Sjekk den her, Leo
 
 public class DobbeltLenketListe<T> implements Liste<T> {
 
