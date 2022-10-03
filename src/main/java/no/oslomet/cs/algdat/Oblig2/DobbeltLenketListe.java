@@ -61,7 +61,6 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         // Setter inn siste elementet først, fordi det er lettere å sette elementene på starten av lista
         // Sjekker siste element i lista som != null
         antall = 0;
-        int antallNulls = 0; // teller antall nuller i lista
         for (int i = a.length - 1; i >= 0; i--){
             if (a[i] != null){ //finner det siste elementet i lista som ikke er 0
                 hode = hale = new Node<>(a[i], null, null); // NB! Sjekk om den er null!!!!
@@ -101,7 +100,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     public boolean leggInn(T verdi) {
         // throw new UnsupportedOperationException();
         if (verdi == null){
-            Objects.requireNonNull(verdi, "Kan ikke legge inn null-verdi!"); //NB! finn metode for å sjekke om verdi er null
+            Objects.requireNonNull(verdi, "Kan ikke legge inn null-verdi!"); //Metode for å sjekke om verdi er null?
             return false;
         }
 
