@@ -45,6 +45,13 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     public DobbeltLenketListe(T[] a) {
         throw new UnsupportedOperationException();
+        //Sjekker om a er null
+
+        //Sjekker om a har 0 i lengde
+
+        // Setter inn siste elementet først, fordi det er lettere å sette elementene på starten av lista
+        // Sjekker siste element i lista som != null
+        // Bruk for-loop til å gå igjennom lista og lag noder som connecter til hverandre
     }
 
     public Liste<T> subliste(int fra, int til) {
@@ -53,12 +60,17 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public int antall() {
-        throw new UnsupportedOperationException();
+        // throw new UnsupportedOperationException();
+        return antall;
     }
 
     @Override
     public boolean tom() {
-        throw new UnsupportedOperationException();
+        // throw new UnsupportedOperationException();
+        if (antall == 0){
+            return true;
+        }
+        else return false;
     }
 
     @Override
