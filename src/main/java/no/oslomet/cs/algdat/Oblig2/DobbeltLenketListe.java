@@ -82,36 +82,23 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     @Override
     public void leggInn(int indeks, T verdi) {
         Objects.requireNonNull(verdi);
-        indeksKontroll(indeks, false);
+        if(indeks < 0 || indeks > antall) throw new IndexOutOfBoundsException(melding(indeks));
 
-        if(antall == 0) {
-            hode = hale = new Node<>(verdi, null, null);
-            antall++;
-            endringer++;
-        }
-        if(indeks == 0) {
-            hode = hode.forrige = new Node<>(verdi, null, hode);
-            antall++;
-            endringer++;
-        }
-        if(indeks == antall - 1) {
-            hale = hale.neste = new Node<>(verdi, hale, null);
-            antall++;
-            endringer++;
-        }
-
-        Node<T> p = hode;
-        Node<T> q;
-        for(int i = 0; i < antall - 1; i++) {
-            if(p.neste.verdi.equals(verdi)) {
-                q = p.neste;
-                Node<T> ny = new Node<>(verdi, p, q);
-                p.neste = ny;
-                q.forrige = ny;
+        else if(antall == 0) hode = hale = new Node<>(verdi, null, null);
+        else if(indeks == 0) hode = hode.forrige = new Node<>(verdi, null, hode);
+        else if(indeks == antall) hale = hale.neste = new Node<>(verdi, hale, null);
+        else {
+            Node<T> p = hode;
+            Node<T> q;
+            for(int i = 0; i < indeks - 1; i++) {
+                p = p.neste;
             }
-            p = p.neste;
-        }
 
+            q = p.neste;
+            Node<T> ny = new Node<>(verdi, p, q);
+            p.neste = ny;
+            q.forrige = ny;
+        }
         antall++;
         endringer++;
     }
