@@ -6,6 +6,7 @@ package no.oslomet.cs.algdat.Oblig2;
 
 import java.util.Comparator;
 import java.util.Iterator;
+import java.util.Objects;
 
 
 //Sjekk den her
@@ -80,7 +81,39 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public void leggInn(int indeks, T verdi) {
-        throw new UnsupportedOperationException();
+        Objects.requireNonNull(verdi);
+        indeksKontroll(indeks, false);
+
+        if(antall == 0) {
+            hode = hale = new Node<>(verdi, null, null);
+            antall++;
+            endringer++;
+        }
+        if(indeks == 0) {
+            hode = hode.forrige = new Node<>(verdi, null, hode);
+            antall++;
+            endringer++;
+        }
+        if(indeks == antall - 1) {
+            hale = hale.neste = new Node<>(verdi, hale, null);
+            antall++;
+            endringer++;
+        }
+
+        Node<T> p = hode;
+        Node<T> q;
+        for(int i = 0; i < antall - 1; i++) {
+            if(p.neste.verdi.equals(verdi)) {
+                q = p.neste;
+                Node<T> ny = new Node<>(verdi, p, q);
+                p.neste = ny;
+                q.forrige = ny;
+            }
+            p = p.neste;
+        }
+
+        antall++;
+        endringer++;
     }
 
     @Override
