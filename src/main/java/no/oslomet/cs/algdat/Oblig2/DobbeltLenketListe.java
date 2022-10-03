@@ -95,7 +95,20 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public int indeksTil(T verdi) {
-        throw new UnsupportedOperationException();
+        //Sjekke først om verdien er null
+        if(verdi == null) {
+            return -1;
+        }
+
+        //lager en peker som går gjennom listen og sjekker hver verdi mot parameter verdien
+        Node<T> p = hode;
+        for(int i = 0; i < antall; i++) {
+            if(p.verdi.equals(verdi)) return i;
+            p = p.neste;
+        }
+
+        //returnerer -1 hvis den ikke finner verdien
+        return -1;
     }
 
     @Override
