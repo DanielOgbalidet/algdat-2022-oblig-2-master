@@ -8,6 +8,8 @@ import java.util.Comparator;
 import java.util.Iterator;
 
 
+//Sjekk den her
+
 public class DobbeltLenketListe<T> implements Liste<T> {
 
     /**
