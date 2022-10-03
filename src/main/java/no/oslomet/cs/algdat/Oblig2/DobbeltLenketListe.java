@@ -41,7 +41,10 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     private int endringer;         // antall endringer i listen
 
     public DobbeltLenketListe() {
-        throw new UnsupportedOperationException();
+        // throw new UnsupportedOperationException();
+        hode = hale = null;        // hode og hale til null
+        antall = 0;                // ingen verdier - listen er tom
+        endringer = 0;       // ingen endringer når vi starter
     }
 
     public DobbeltLenketListe(T[] a) {
@@ -191,11 +194,49 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public String toString() {
-        throw new UnsupportedOperationException();
+        // throw new UnsupportedOperationException();
+        StringBuilder s = new StringBuilder();
+
+        s.append('[');
+
+        //sjekker om lista er tom
+        if (!tom()) {
+            Node<T> peker = hode;
+            s.append(peker.verdi);
+
+            peker = peker.neste;
+
+            while (peker != null) { //går igjennom hele lista til pekern peker på null-verdien til hale.neste
+                s.append(',').append(' ').append(peker.verdi);
+                peker = peker.neste;
+            }
+        }
+
+        s.append(']');
+        return s.toString();
     }
 
     public String omvendtString() {
-        throw new UnsupportedOperationException();
+        // throw new UnsupportedOperationException();
+        StringBuilder s = new StringBuilder();
+
+        s.append('[');
+
+        //sjekker om lista er tom
+        if (!tom()) {
+            Node<T> peker = hale;
+            s.append(peker.verdi);
+
+            peker = peker.forrige;
+
+            while (peker != null) { //går igjennom hele lista til pekern peker på null-verdien til hale.neste
+                s.append(',').append(' ').append(peker.verdi);
+                peker = peker.forrige;
+            }
+        }
+
+        s.append(']');
+        return s.toString();
     }
 
     @Override
