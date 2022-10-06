@@ -347,11 +347,45 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             return denneVerdi;
         }
 
+
+        //Hode er peker til den første noden, og hale er peker til den siste noden
+        //forrige og neste er pekerne i listen
+
+//Mangler siste else, og metoden public T next fra tidligere oppgaver må gjøres for at metoden remove skal fungere
+//Inspirert fra kompendiet programkode 3.3.4 d, og kap 3 kildekode
+
         @Override
         public void remove() {
-            throw new UnsupportedOperationException();
-        }
+            //vet ikke når det ikke er lov å remove, bør sjekke testkode kanskje
+            if (antall == 0 || !fjernOK) {
+                throw new IllegalStateException("Antall i listen kan ikke være 0");
+            }
+            if (iteratorendringer != endringer) {
+                throw new ConcurrentModificationException();
+            }
+            fjernOK = false;
 
+            Node<T> q = hode;
+            if (antall == 1) { //Oppgave 1: Hode og hale nulles hvis det som skal fjernes er eneste verdi
+                hode = hale = null;
+            } else if (denne == null) { //Oppgave 2: hvis den siste skal fjernes, så må hale oppdateres
+                q = hale;
+                hale = hale.forrige;
+                hale.neste = null;
+            }
+            else if (denne.forrige == hode) { //Oppgave 3: Hvis den første skal fjernes, så må hode oppdateres
+                hode = hode.neste;
+                hode.forrige = null;
+            } else {
+                q = denne.forrige;
+                q.forrige.neste = q.neste;
+                q.neste.forrige = q.forrige;
+            }
+
+            antall--; //Antall skal reduseres og både iteratorer og endringer skal økes
+            endringer++;
+            iteratorendringer++;
+        }
     } // class DobbeltLenketListeIterator
 
     public static <T> void sorter(Liste<T> liste, Comparator<? super T> c) {
