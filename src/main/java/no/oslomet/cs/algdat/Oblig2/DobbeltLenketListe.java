@@ -246,9 +246,35 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         return verdi;
     }
 
-    @Override
-    public void nullstill() {
-        throw new UnsupportedOperationException();
+    //Oppgave 7
+
+    public void nullstill()
+    {
+
+        //Begynn på hodet først:
+        Node<T> p = hode;
+
+        //Inspirert fra kompendiet  3.2.3 oppgave 2
+        if (p != null){
+
+         /* Vi setter q = p.neste, og deretter nullifiserer vi p.neste og p.verdi
+            p er hodet, og ved hjelp av p.neste kan vi flytte den til neste node ved å sette lik q, for så å
+            nullifisere forrige node ved å deretter sette p.neste og q.verdi lik "null", også fortsetter den videre slik
+            helt til hodet og halen har blitt nullifisert, antall = 0 og endringer økes med ++  */
+
+
+            Node<T> q = p.neste;
+
+            p.neste = null;     // Dette er til resirkuleringen
+            p.forrige = null;   // Dette er til resirkuleringen
+            p.verdi = null;     // Dette er til resirkuleringen
+
+            //   Nå oppdaterer vi Node q --> med p = q;
+            p = q;
+        }
+        antall = 0;
+        endringer++;
+        hode = hale = null;
     }
 
     @Override
