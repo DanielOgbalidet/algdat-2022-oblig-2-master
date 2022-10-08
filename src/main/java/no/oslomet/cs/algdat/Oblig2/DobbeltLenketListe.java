@@ -75,6 +75,31 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         }
     }
 
+//Oppgave 3a
+
+    //Fra kompendiet programkode 3.3.3 a
+    private Node<T> finnNode(int indeks){
+
+        Node<T> p;
+        if(indeks<this.antall/2){
+            p = this.hode;
+            for (int i = 0; i < indeks; i++) p = p.neste;}
+
+        else{
+            //Nå samme forløkke fra kompendiet men vi må la den kjøre motsatt retning med negative verdier
+            // (for at den skal gå fra halen mot venstre)
+            p = this.hale;
+            for (int i=this.antall-1;i>indeks;i--){
+                p = p.forrige;}
+        }
+        return p;
+    }
+
+
+
+
+
+    //Oppgave 3b
     public Liste<T> subliste(int fra, int til) {
         throw new UnsupportedOperationException();
     }
