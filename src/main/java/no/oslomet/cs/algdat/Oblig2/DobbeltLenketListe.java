@@ -462,7 +462,23 @@ sjekkes, at null-verdier ikke skal kunne legges inn og at variabelen endringer s
     } // class DobbeltLenketListeIterator
 
     public static <T> void sorter(Liste<T> liste, Comparator<? super T> c) {
-        throw new UnsupportedOperationException();
+
+    }
+
+    private static <T> void quickSort(Liste<T> liste, int lavIndeks, int høyIndeks, Comparator<? super T> c) {
+        if (lavIndeks >= høyIndeks) return;
+
+        //lager en random pivot som jeg "sender" til slutten av arraeyet
+        int pivotIndeks = new Random().nextInt(høyIndeks - lavIndeks) + lavIndeks;
+        T pivot = liste.hent(pivotIndeks);
+        bytt(liste, pivotIndeks, høyIndeks);
+
+        //venstrePeker er hvor vi deler arraeyet til mindre array hvor vi gjør algoritmer igjen rekursivt
+        int venstrePeker = partisjon(liste, lavIndeks, høyIndeks, pivot, c);
+
+
+        quickSort(liste, lavIndeks, venstrePeker - 1, c);
+        quickSort(liste, venstrePeker + 1, høyIndeks, c);
     }
 
 } // class DobbeltLenketListe
