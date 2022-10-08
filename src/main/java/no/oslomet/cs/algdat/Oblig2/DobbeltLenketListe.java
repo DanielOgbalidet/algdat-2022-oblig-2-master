@@ -95,11 +95,39 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         return p;
     }
 
+    //Fra kompendiet 3.3.3 b
+    @Override
+    public T hent(int indeks) {
+        indeksKontroll(indeks, false);
+        return finnNode(indeks).verdi;
+    }
 
+
+    /*
+     Lag  også  metoden T  oppdater(int  indeks,  T  nyverdi).  Den  skal  erstatte
+verdien på plass indeks med nyverdi og returnere det som lå der fra før. Husk at indeks må
+sjekkes, at null-verdier ikke skal kunne legges inn og at variabelen endringer skal økes.
+     */
+
+    //inspirert av kompendiet programkode 3.3.3 b og kildekode kap 3
+    @Override
+    public T oppdater(int indeks, T nyverdi) {
+        Objects.requireNonNull(nyverdi, "Ikke tillatt med null-verdier!");
+
+        indeksKontroll(indeks, false);  // Se Liste, false: indeks = antall er ulovlig
+
+        Node<T> p = finnNode(indeks);
+        T gammelVerdi = p.verdi;
+
+        p.verdi = nyverdi;
+        endringer++;
+        return gammelVerdi;
+    }
 
 
 
     //Oppgave 3b
+
     public Liste<T> subliste(int fra, int til) {
         throw new UnsupportedOperationException();
     }
@@ -171,10 +199,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         return indeksTil(verdi) != -1;
     }
 
-    @Override
-    public T hent(int indeks) {
-        throw new UnsupportedOperationException();
-    }
+
 
     @Override
     public int indeksTil(T verdi) {
@@ -194,10 +219,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         return -1;
     }
 
-    @Override
-    public T oppdater(int indeks, T nyverdi) {
-        throw new UnsupportedOperationException();
-    }
+
 
     @Override
     public boolean fjern(T verdi) {
