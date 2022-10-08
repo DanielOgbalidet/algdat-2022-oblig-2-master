@@ -462,7 +462,7 @@ sjekkes, at null-verdier ikke skal kunne legges inn og at variabelen endringer s
     } // class DobbeltLenketListeIterator
 
     public static <T> void sorter(Liste<T> liste, Comparator<? super T> c) {
-
+        quickSort(liste, 0, liste.antall() - 1, c);
     }
 
     private static <T> void quickSort(Liste<T> liste, int lavIndeks, int høyIndeks, Comparator<? super T> c) {
@@ -479,6 +479,38 @@ sjekkes, at null-verdier ikke skal kunne legges inn og at variabelen endringer s
 
         quickSort(liste, lavIndeks, venstrePeker - 1, c);
         quickSort(liste, venstrePeker + 1, høyIndeks, c);
+    }
+
+    private static <T> int partisjon(Liste<T> liste, int lavIndeks, int høyIndeks, T pivot, Comparator<? super T> c) {
+        int høyrePeker = høyIndeks;
+        int venstrePeker = lavIndeks;
+
+        while (venstrePeker < høyrePeker) {
+            //Finner tall som er høyere enn pivot tallet
+            while (c.compare(liste.hent(venstrePeker), pivot) <= 0  && venstrePeker < høyrePeker) {
+                venstrePeker++;
+            }
+
+            //finner tall som er mindre enn pivot
+            while (c.compare(liste.hent(høyrePeker), pivot) >= 0 && venstrePeker < høyrePeker) {
+                høyrePeker--;
+            }
+
+            //bruker partisjonering for å bytte plass på tallene
+            bytt(liste, venstrePeker, høyrePeker);
+        }
+
+        //bytter tilbake pivot tallet som nå vil ligge på rett plass i forhold til de andre tallene
+        bytt(liste, venstrePeker, høyIndeks);
+        return venstrePeker;
+    }
+
+    public static <T> void bytt(Liste<T> liste, int i, int j) {
+        T iVerdi = liste.hent(i);
+        T jVerdi = liste.hent(j);
+
+        liste.oppdater(j, iVerdi);
+        liste.oppdater(i, jVerdi);
     }
 
 } // class DobbeltLenketListe
