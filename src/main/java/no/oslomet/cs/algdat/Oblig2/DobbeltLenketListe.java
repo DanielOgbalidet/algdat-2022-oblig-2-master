@@ -129,7 +129,18 @@ sjekkes, at null-verdier ikke skal kunne legges inn og at variabelen endringer s
     //Oppgave 3b
 
     public Liste<T> subliste(int fra, int til) {
-        throw new UnsupportedOperationException();
+        Liste<T> list = new DobbeltLenketListe<>();
+
+        Node<T> p = hode;
+
+        for(int i = 0; i < til; i++) {
+            if(i >= fra) {
+                list.leggInn(p.verdi);
+            }
+            p = p.neste;
+        }
+
+        return list;
     }
 
     @Override
