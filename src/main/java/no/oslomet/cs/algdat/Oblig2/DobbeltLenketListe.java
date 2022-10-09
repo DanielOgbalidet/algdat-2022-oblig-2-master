@@ -129,6 +129,9 @@ sjekkes, at null-verdier ikke skal kunne legges inn og at variabelen endringer s
     //Oppgave 3b
 
     public Liste<T> subliste(int fra, int til) {
+        if(fra < 0 || til > antall) throw new IndexOutOfBoundsException();
+        if(fra > til) throw new IllegalArgumentException();
+
         Liste<T> list = new DobbeltLenketListe<>();
 
         Node<T> p = hode;
