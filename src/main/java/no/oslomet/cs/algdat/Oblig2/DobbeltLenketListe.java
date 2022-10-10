@@ -126,6 +126,8 @@ sjekkes, at null-verdier ikke skal kunne legges inn og at variabelen endringer s
 
 
 
+
+
     //Oppgave 3b
 
     public Liste<T> subliste(int fra, int til) {
@@ -312,6 +314,7 @@ sjekkes, at null-verdier ikke skal kunne legges inn og at variabelen endringer s
     public void nullstill()
     {
 
+
         //Begynn på hodet først:
         Node<T> p = hode;
 
@@ -443,7 +446,7 @@ sjekkes, at null-verdier ikke skal kunne legges inn og at variabelen endringer s
 
         @Override
         public void remove() {
-            //vet ikke når det ikke er lov å remove, bør sjekke testkode kanskje
+
             if (antall == 0 || !fjernOK) {
                 throw new IllegalStateException("Antall i listen kan ikke være 0");
             }
@@ -455,12 +458,15 @@ sjekkes, at null-verdier ikke skal kunne legges inn og at variabelen endringer s
             Node<T> q = hode;
             if (antall == 1) { //Oppgave 1: Hode og hale nulles hvis det som skal fjernes er eneste verdi
                 hode = hale = null;
-            } else if (denne == null) { //Oppgave 2: hvis den siste skal fjernes, så må hale oppdateres
+            } else if (denne == null) { //Oppgave 2: hvis den siste skal fjernes, så oppdaterer vi halen ved å
+                // sette denne =null;
                 q = hale;
                 hale = hale.forrige;
                 hale.neste = null;
             }
-            else if (denne.forrige == hode) { //Oppgave 3: Hvis den første skal fjernes, så må hode oppdateres
+            else if (denne.forrige == hode) {
+                //Oppgave 3: Hvis den første skal fjernes, så må hode oppdateres
+
                 hode = hode.neste;
                 hode.forrige = null;
             } else {
