@@ -6,10 +6,6 @@ package no.oslomet.cs.algdat.Oblig2;
 
 import java.util.*;
 
-
-//Sjekk den her
-//Sjekk den her, Leo
-
 public class DobbeltLenketListe<T> implements Liste<T> {
 
     /**
@@ -185,6 +181,7 @@ sjekkes, at null-verdier ikke skal kunne legges inn og at variabelen endringer s
         return true;
     }
 
+    //Inspirert fra programkode 3.2.3 b)
     @Override
     public void leggInn(int indeks, T verdi) {
         Objects.requireNonNull(verdi);
@@ -236,7 +233,7 @@ sjekkes, at null-verdier ikke skal kunne legges inn og at variabelen endringer s
     }
 
 
-
+    //Inspirasjon hentet fra programkode 3.3.3 c)
     @Override
     public boolean fjern(T verdi) {
         if(verdi == null) return false;
@@ -276,6 +273,7 @@ sjekkes, at null-verdier ikke skal kunne legges inn og at variabelen endringer s
         return true;
     }
 
+    //Inspirasjon fra programbit 3.3.3 c)
     @Override
     public T fjern(int indeks) {
         if(antall == 0 || indeks < 0 || indeks > antall - 1) throw new IndexOutOfBoundsException(melding(indeks));
@@ -341,6 +339,7 @@ sjekkes, at null-verdier ikke skal kunne legges inn og at variabelen endringer s
         hode = hale = null;
     }
 
+    // hentet fra EnkeltLenketListe klassen i kompendiet, med noen endringer
     @Override
     public String toString() {
         // throw new UnsupportedOperationException();
@@ -420,11 +419,13 @@ sjekkes, at null-verdier ikke skal kunne legges inn og at variabelen endringer s
             iteratorendringer = endringer;
         }
 
+        //Brukt programkode 3.3.4 b)
         @Override
         public boolean hasNext() {
             return denne != null;
         }
 
+        //inspirasjon fra 3.3.4 c)
         @Override
         public T next() {
             if(iteratorendringer != endringer) throw new ConcurrentModificationException();
@@ -485,6 +486,7 @@ sjekkes, at null-verdier ikke skal kunne legges inn og at variabelen endringer s
         quickSort(liste, 0, liste.antall() - 1, c);
     }
 
+    //Hentet inspirasjon fra kapittel 1.5.7
     private static <T> void quickSort(Liste<T> liste, int lavIndeks, int høyIndeks, Comparator<? super T> c) {
         if (lavIndeks >= høyIndeks) return;
 
