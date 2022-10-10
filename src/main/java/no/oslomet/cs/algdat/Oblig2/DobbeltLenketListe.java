@@ -441,7 +441,7 @@ sjekkes, at null-verdier ikke skal kunne legges inn og at variabelen endringer s
         //Hode er peker til den første noden, og hale er peker til den siste noden
         //forrige og neste er pekerne i listen
 
-//Mangler siste else, og metoden public T next fra tidligere oppgaver må gjøres for at metoden remove skal fungere
+
 //Inspirert fra kompendiet programkode 3.3.4 d, og kap 3 kildekode
 
         @Override
